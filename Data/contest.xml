@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contest>
+  <student>
+    <nume>name 1</nume>
+    <class>class 1</class>
+  </student>
+  <student>
+    <nume>name 2</nume>
+    <class>class 2</class>
+  </student>
+  <student>
+    <nume>name 3</nume>
+    <class>class 3</class>
+  </student>
+</contest>
