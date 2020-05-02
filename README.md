@@ -1,2 +1,2 @@
 # refactoring-sample
-Refactoring sample in java.
+Refactoring sample in PHP.
