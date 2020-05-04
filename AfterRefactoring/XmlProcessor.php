@@ -1,8 +1,21 @@
 <?php
 
-class XMLDataProcessor {
-	
+interface ParsingRequirements {
+
+	public function SourceAssignation ($Source);
+}
+
+class XMLDataProcessor implements ParsingRequirements {
+
+	private string $FileSource;
+
+	public function SourceAssignation ($Source) {
+
+		$this->FileSource = $Source;
+	} 
+
 	private function OutputTrimData ($ValueToTrim) {
+
 		echo(trim($ValueToTrim));
 		echo("</br>");
 	}
@@ -23,16 +36,18 @@ class XMLDataProcessor {
 	}
 
 	public function SetupProcess ($DOM) {
-		
-		$DOM->load("../Data/contest.xml");
-		
+
+		$DOM->load($this->FileSource);
+
 		$root = $DOM->documentElement;
-		
+
 		$this->ProcessXMLData($root);
 	}
 }
 
 $Processor = new XMLDataProcessor();
+
+$Processor->SourceAssignation("../Data/contest.xml");
 
 $DOM = new DOMDocument();
 
