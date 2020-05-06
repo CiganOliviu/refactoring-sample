@@ -11,7 +11,7 @@ class XMLDataProcessor implements ParsingRequirements {
 
 	public function SourceAssignation ($Source) {
 
-		$this->FileSource = $Source;
+		$this -> FileSource = $Source;
 	} 
 
 	private function OutputTrimData ($ValueToTrim) {
@@ -29,28 +29,28 @@ class XMLDataProcessor implements ParsingRequirements {
 	    if ($Element -> nodeType == XML_TEXT_NODE) {
 
 	      if (strlen(trim($Element->nodeValue)))
-	      	$this->OutputTrimData($Element->nodeValue);
+	      	$this -> OutputTrimData($Element->nodeValue);
 
 	    } else if ($Element -> nodeType == XML_ELEMENT_NODE)
-	      $this->ProcessXMLData($Element);
+	      $this -> ProcessXMLData($Element);
 	}
 
 	public function SetupProcess ($DOM) {
 
-		$DOM->load($this->FileSource);
+		$DOM -> load($this->FileSource);
 
 		$root = $DOM->documentElement;
 
-		$this->ProcessXMLData($root);
+		$this -> ProcessXMLData($root);
 	}
 }
 
 $Processor = new XMLDataProcessor();
 
-$Processor->SourceAssignation("../Data/contest.xml");
+$Processor -> SourceAssignation("../Data/contest.xml");
 
 $DOM = new DOMDocument();
 
-$Processor->SetupProcess($DOM);
+$Processor -> SetupProcess($DOM);
 
 ?>
