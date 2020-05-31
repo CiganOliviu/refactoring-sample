@@ -7,13 +7,6 @@ interface ParsingRequirements {
 
 class XMLDataProcessor implements ParsingRequirements {
 
-	private string $FileSource;
-
-	public function SourceAssignation ($Source) {
-
-		$this -> FileSource = $Source;
-	} 
-
 	private function OutputTrimData ($ValueToTrim) {
 
 		echo(trim($ValueToTrim));
@@ -34,6 +27,13 @@ class XMLDataProcessor implements ParsingRequirements {
 	    } else if ($Element -> nodeType == XML_ELEMENT_NODE)
 	      $this -> ProcessXMLData($Element);
 	}
+
+	private string $FileSource;
+
+	public function SourceAssignation ($Source) {
+
+		$this -> FileSource = $Source;
+	} 
 
 	public function SetupProcess ($DOM) {
 
