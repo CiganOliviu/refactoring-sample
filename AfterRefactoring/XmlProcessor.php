@@ -1,8 +1,13 @@
 <?php
 
+class FileDataSource {
+
+	public string $FileSource;
+}
+
 interface ParsingRequirements {
 
-	public function SourceAssignation ($Source);
+	public function SourceAssignation ($Source, FileDataSource $DataSource);
 }
 
 class XMLDataProcessor implements ParsingRequirements {
@@ -28,16 +33,14 @@ class XMLDataProcessor implements ParsingRequirements {
 	      $this -> ProcessXMLData($Element);
 	}
 
-	private string $FileSource;
+	public function SourceAssignation ($Source, FileDataSource $DataSource) {
 
-	public function SourceAssignation ($Source) {
-
-		$this -> FileSource = $Source;
+		$DataSource->FileSource = $Source;
 	} 
 
-	public function SetupProcess ($DOM) {
+	public function SetupProcess ($DOM, FileDataSource $DataSource) {
 
-		$DOM -> load($this->FileSource);
+		$DOM -> load($DataSource->FileSource);
 
 		$root = $DOM->documentElement;
 
@@ -45,12 +48,12 @@ class XMLDataProcessor implements ParsingRequirements {
 	}
 }
 
-$Processor = new XMLDataProcessor();
-
-$Processor -> SourceAssignation("../Data/contest.xml");
+$Processor = new XMLDataProcessor ();
+$DataSource = new FileDataSource ();
+$Processor -> SourceAssignation("../Data/contest.xml", $DataSource);
 
 $DOM = new DOMDocument();
 
-$Processor -> SetupProcess($DOM);
+$Processor -> SetupProcess($DOM, $DataSource);
 
 ?>
