@@ -18,18 +18,25 @@ class XMLDataProcessor implements ParsingRequirements {
 		echo("</br>");
 	}
 
+	/**
+	 * @param $Element
+	 */
+	private function GetDataIfElementIsNodeValue($Element): void
+	{
+		if (strlen(trim($Element->nodeValue)))
+			$this->OutputTrimData($Element->nodeValue);
+	}
+
 	private function ProcessXMLData ($Node) {
 
 	  $Child = $Node -> childNodes;
 
 	  foreach ($Child as $Element)
 
-	    if ($Element -> nodeType == XML_TEXT_NODE) {
+	    if ($Element -> nodeType == XML_TEXT_NODE)
+			$this->GetDataIfElementIsNodeValue($Element);
 
-	      if (strlen(trim($Element->nodeValue)))
-	      	$this -> OutputTrimData($Element->nodeValue);
-
-	    } else if ($Element -> nodeType == XML_ELEMENT_NODE)
+		else if ($Element -> nodeType == XML_ELEMENT_NODE)
 	      $this -> ProcessXMLData($Element);
 	}
 
@@ -55,5 +62,3 @@ $Processor -> SourceAssignation("../Data/contest.xml", $DataSource);
 $DOM = new DOMDocument();
 
 $Processor -> SetupProcess($DOM, $DataSource);
-
-?>
