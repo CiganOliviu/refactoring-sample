@@ -12,7 +12,7 @@ interface ParsingRequirements {
 
 class XMLDataProcessor implements ParsingRequirements {
 
-	private function OutputTrimData ($ValueToTrim) {
+	private function OutputTrimData ($ValueToTrim): void {
 
 		echo(trim($ValueToTrim));
 		echo("</br>");
@@ -27,7 +27,7 @@ class XMLDataProcessor implements ParsingRequirements {
 			$this->OutputTrimData($Element->nodeValue);
 	}
 
-	private function ProcessXMLData ($Node) {
+	private function ProcessXMLData ($Node): void {
 
 	  $Child = $Node -> childNodes;
 
@@ -40,12 +40,12 @@ class XMLDataProcessor implements ParsingRequirements {
 	      $this -> ProcessXMLData($Element);
 	}
 
-	public function SourceAssignation ($Source, FileDataSource $DataSource) {
+	public function SourceAssignation ($Source, FileDataSource $DataSource): void {
 
 		$DataSource->FileSource = $Source;
 	} 
 
-	public function SetupProcess ($DOM, FileDataSource $DataSource) {
+	public function SetupProcess ($DOM, FileDataSource $DataSource): void {
 
 		$DOM -> load($DataSource->FileSource);
 
